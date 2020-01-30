@@ -2,6 +2,8 @@
 
 -export([print/1, print_exports/1]).
 
+-compile(export_all).
+
 -define(ASNI_ITALIC, "\e[35;1m"). % Magenta bright
 -define(ASNI_BOLD, "\e[36;1m").   % Cyan bright
 -define(ASNI_END, "\e[0m").
@@ -50,9 +52,6 @@ print([".fi" | R], Buffer, Indent, Fill) ->
 print([".nf" | R], Buffer, Indent, Fill) ->
     flush(Buffer, lists:sum(Indent), Fill),
     print(R, [], Indent, false);
-print([".RS"|R], Buffer, Indent, Fill) ->
-    flush(Buffer, lists:sum(Indent), Fill),
-    print(R, [], [4|Indent], Fill);
 print([".RE"|R], Buffer, [], Fill) ->
     flush(Buffer, 0, Fill),
     print(R, [], [], Fill);
@@ -60,6 +59,9 @@ print([".RE"|R], Buffer, Indent, Fill) ->
     flush(Buffer, lists:sum(Indent), Fill),
     [_|I] = Indent,
     print(R, [], I, Fill);
+print([".RS"|R], Buffer, Indent, Fill) ->
+    flush(Buffer, lists:sum(Indent), Fill),
+    print(R, [], [4|Indent], Fill);
 print([[$.,$R, $S,$\s|N] | R], Buffer, Indent, Fill) ->
     flush(Buffer, lists:sum(Indent), Fill),
     print(R, [], [list_to_integer(N) | Indent], Fill);
@@ -81,6 +83,8 @@ print([Line | R], Buffer, Indent, false) ->
 
 flush([], _Indent, _FillMode) ->
     ok;
+flush(Words, Indent, Fill) when Indent < 0 ->
+    flush(Words, 0, Fill);
 flush(Words, Indent, true) ->
     {Line, R1} = fill_line(Words, ?DEFAULT_WIDTH - Indent, []),
     io:format("~.*c~s~n", [Indent, $\s, string:join(Line, " ")]),

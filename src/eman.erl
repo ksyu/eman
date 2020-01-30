@@ -20,7 +20,7 @@ h(M, F) ->
     {ok, Lines} = eman_file:read(M),
     Man = eman_parse:parse(Lines),
     Doc = find(Man, atom_to_list(F)),
-    print_doc(Doc, lists:concat([M, F])).
+    print_doc(Doc, lists:concat([M, ":", F])).
 
 -spec h(atom(), atom(), pos_integer()) -> ok.
 h(M, F, A) ->
