@@ -1,4 +1,4 @@
-### erlman
+### eman
 
 ---
 
@@ -13,10 +13,10 @@ Add erlang man directory to environment variable MANPATH, i.e.
 export MANPATH=`man --path`:/usr/local/lib/erlang/man
 ```
 
-##### erlman:h(Module::atom()) -> ok.
+##### eman:h(Module::atom()) -> ok.
 
 ```erlang
-> erlman:h(lists).
+> eman:h(lists).
   lists <stdlib 3.6>
 
   Summary
@@ -26,10 +26,10 @@ export MANPATH=`man --path`:/usr/local/lib/erlang/man
   ...
 ```
 
-##### erlman:h(Module::atom(), Fun::atom()) -> ok.
+##### eman:h(Module::atom(), Fun::atom()) -> ok.
 
 ```erlang
-> erlman:h(lists, append).
+> eman:h(lists, append).
   append(ListOfLists) -> List1
   ...
 
@@ -38,14 +38,14 @@ export MANPATH=`man --path`:/usr/local/lib/erlang/man
 
 ```
 
-##### erlman:h(Module::atom(), Fun::atom(), Arity::integer()) -> ok.
+##### eman:h(Module::atom(), Fun::atom(), Arity::integer()) -> ok.
 
 ```erlang
-> erlman:h(lists, append, 1).
+> eman:h(lists, append, 1).
   append(ListOfLists) -> List1
   ...
 
 ```
 
 ### License
-[Apache 2.0] (https://github.com/ksyu/erlman/blob/master/LICENSE)
+[Apache 2.0] (https://github.com/ksyu/eman/blob/master/LICENSE)
