@@ -2,8 +2,6 @@
 
 -export([print/1, print_exports/1]).
 
--compile(export_all).
-
 -define(ASNI_ITALIC, "\e[35;1m"). % Magenta bright
 -define(ASNI_BOLD, "\e[36;1m").   % Cyan bright
 -define(ASNI_END, "\e[0m").
@@ -38,8 +36,8 @@ col([], Acc) ->
 col([{F, _}|R], Acc) ->
     col(R, [length(atom_to_list(F)) | Acc]).
 
-print([], _Buffer, _Indent, _Fill) ->
-    ok;
+print([], Buffer, Indent, Fill) ->
+    flush(Buffer, lists:sum(Indent), Fill);
 print(["" | R], Buffer, Indent, Fill) ->
     flush(Buffer, lists:sum(Indent), Fill),
     print(R, [], Indent, Fill);

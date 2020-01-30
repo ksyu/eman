@@ -12,6 +12,19 @@ Add erlang man directory to environment variable MANPATH, i.e.
 ```bash
 export MANPATH=`man --path`:/usr/local/lib/erlang/man
 ```
+##### eman:h(MFA::string()) -> ok.
+```erlang
+> eman:h("lists:append").
+  append(ListOfLists) -> List1
+  ...
+
+  append(List1, List2) -> List3
+  ...
+
+> eman:h("lists:append/2").
+  append(List1, List2) -> List3
+  ...
+```
 
 ##### eman:h(Module::atom()) -> ok.
 
